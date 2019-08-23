@@ -1,6 +1,6 @@
 const projectForm = `
 <form id="project-form" action="">
-    <input type="text" name="project">
+    <input type="text" name="name">
     <button type="submit">SUBMIT</button>
 </form> `;
 

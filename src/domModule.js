@@ -8,7 +8,6 @@ const domModule = (function(){
         let projectButton = document.querySelector('#project-button');
         projectButton.addEventListener('click', () => {
             form_holder.innerHTML = projectForm;         
-            alert('project-form')   
         });
     };
 
@@ -16,7 +15,6 @@ const domModule = (function(){
         let todoButton = document.querySelector('#todo-button');
         todoButton.addEventListener('click', () => {
             form_holder.innerHTML = todoForm;            
-            alert('project-form')   
         });
     };
     

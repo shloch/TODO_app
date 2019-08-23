@@ -1,22 +1,22 @@
 'use strict';
 
 var ProjectModule = (function() {
-    let moduleList = ['GENERAL', 'WORK', 'HOME'];
+    let projectList = ['GENERAL', 'WORK', 'HOME'];
 
 
     let mod = {};
     mod.addProject = function(newProjectName) {
-        moduleList.push(newProjectName);
+        projectList.push(newProjectName);
     }
     mod.removeProject = function(projectName) {
-        let idx = moduleList.indexOf(projectName)
+        let idx = projectList.indexOf(projectName)
         if (idx != -1) {
-            moduleList.splice(idx, 1);
+            projectList.splice(idx, 1);
         }
     };
 
-    mod.returnAllModules = function() {
-        return moduleList;
+    mod.returnAllProjects = function() {
+        return projectList;
     };
 
 
