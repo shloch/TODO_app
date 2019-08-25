@@ -1,8 +1,8 @@
 const projectForm = `
-<form id="project-form" action="">
+<form id="project-form" action="#">
     <input type="text" name="name">
     <button type="submit">SUBMIT</button>
-</form> `;
+</form>`;
 
 const todoForm = `
 <form id="todo-form" action="">
@@ -23,4 +23,4 @@ const todoForm = `
 <button type="submit">SUBMIT</button>
 </form>`;
 
-export {projectForm, todoForm};
+export { projectForm, todoForm };

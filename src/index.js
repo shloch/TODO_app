@@ -8,13 +8,14 @@ let todo_array = [];
 let dom = domModule;
 
 const saveProject = () => {
+    console.log('save project');
     const name = document.querySelector('#project-form [name="name"]').value;
     if (name.length > 0) {
         ProjectModule.addProject(name);
     }
 }
 
-const saveTodo = () => { 
+const saveTodo = () => {
     const title = document.querySelector('#todo-form [name="title"]').value;
     const description = document.querySelector('#todo-form [name="description"]').value;
     const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
@@ -27,22 +28,26 @@ const saveTodo = () => {
 
 const createProject = () => {
     const projectSubmit = document.querySelector('#project-form');
-    projectSubmit.addEventListener('submit', () => {
-        saveProject()
+    projectSubmit.addEventListener('click', (e) => {
+        alert('creating...')
+        saveProject();
+        e.preventDefault();
     })
 }
 
 const createTodo = () => {
     const todoSubmit = document.querySelector('#todo-form');
-    todoSubmit.addEventListener('submit', () => {
+    todoSubmit.addEventListener('submit', (e) => {
+        console.log('sumitted');
         saveTodo()
+        e.preventDefault()
     })
 }
 
-dom.createProjectForm()
-dom.createTodoForm()
-createProject()
-createTodo()
+dom.createProjectForm();
+dom.createTodoForm();
+createProject();
+//createTodo();
 
 console.log(todo_array)
 console.log(ProjectModule.returnAllProjects())
