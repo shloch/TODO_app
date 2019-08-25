@@ -44,10 +44,10 @@ const createTodo = () => {
     })
 }
 
-dom.createProjectForm();
-dom.createTodoForm();
-createProject();
-//createTodo();
+dom.createProjectForm()
+dom.createTodoForm()
+createProject()
+    //createTodo()
 
 console.log(todo_array)
 console.log(ProjectModule.returnAllProjects())
