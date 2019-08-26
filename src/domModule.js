@@ -5,7 +5,7 @@ import { todo } from './TODO_factory'
 
 let projects = ProjectModule.returnAllProjects();
 let todo_array = [];
-let current_project;
+let current_project = 0;
 
 const saveProject = () => {
     const name = document.querySelector('#project-form [name="name"]').value;
@@ -44,6 +44,15 @@ const createTodo = () => {
     })
 }
 
+const projectAction = () => {
+    const projectElems = document.querySelectorAll('#project-list div');
+    projectElems.forEach((element, index)=>{
+        element.addEventListener('click', ()=>{
+            current_project = index;
+            // console.log(projects[current_project]);
+        })
+    })    
+}
 
 const domModule = (function() {
     let mod = {}
@@ -60,7 +69,13 @@ const domModule = (function() {
     mod.createTodoForm = function() {
         let todoButton = document.querySelector('#todo-button');
         todoButton.addEventListener('click', () => {
-            form_holder.innerHTML = todoForm;            
+            form_holder.innerHTML = todoForm; 
+            let todoProject = document.querySelector('#todo-form input:nth-child(1)');
+
+            if (projects[current_project] != "GENERAL") {
+                todoProject.value = projects[current_project]
+                console.log(todoProject.value)
+            }           
             createTodo()
         });
     };
@@ -68,13 +83,14 @@ const domModule = (function() {
     mod.displayProjectList = function() {
         let projectPane = document.querySelector('#project-list')
         projectPane.innerHTML = "";
-        projects.forEach(function (project) {
+        projects.forEach(function (project, index) {
             let div = document.createElement('div');
-             div.innerHTML = project;
+            div.setAttribute('data-index',index);
+            div.innerHTML = project;
             projectPane.insertAdjacentElement("beforeend", div);
         })
     }
 
     return mod;
 })();
-export { domModule, todo_array };
+export { domModule, todo_array, projectAction };

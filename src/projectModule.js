@@ -1,7 +1,7 @@
 'use strict';
 
 var ProjectModule = (function() {
-    let projectList = ['GENERAL', 'WORK', 'HOME'];
+    let projectList = ['GENERAL'];
 
 
     let mod = {};
