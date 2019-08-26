@@ -47,9 +47,10 @@ const createTodo = () => {
 const projectAction = () => {
     const projectElems = document.querySelectorAll('#project-list div');
     projectElems.forEach((element, index)=>{
-        element.addEventListener('click', ()=>{
+        element.addEventListener('click', (e)=>{
             current_project = index;
-            // console.log(projects[current_project]);
+            console.log(projects[current_project]);
+            e.preventDefault();
         })
     })    
 }
@@ -85,9 +86,9 @@ const domModule = (function() {
         projectPane.innerHTML = "";
         projects.forEach(function (project, index) {
             let div = document.createElement('div');
-            div.setAttribute('data-index',index);
             div.innerHTML = project;
             projectPane.insertAdjacentElement("beforeend", div);
+            projectAction()
         })
     }
 
