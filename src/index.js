@@ -8,6 +8,7 @@ let dom = domModule;
 
 dom.createProjectForm()
 dom.createTodoForm()
+dom.displayProjectList()
 
 
 console.log(todo_array)
