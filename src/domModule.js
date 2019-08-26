@@ -1,7 +1,7 @@
 import { projectForm, todoForm } from './forms'
 import { createProject, createTodo, todo_array } from './newModule'
 
-const domModule = (function(){
+const domModule = (function() {
     let mod = {}
     let form_holder = document.querySelector("#form-holder");
 
@@ -20,7 +20,7 @@ const domModule = (function(){
             createTodo()
         });
     };
-    
+
 
     return mod;
 })();

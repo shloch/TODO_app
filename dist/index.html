@@ -1,35 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TODO</title>
-    <link rel="stylesheet" src="asset/style.css" />
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="asset/style.css" />
+    <title>TODO</title>
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <span>TODO APP</span>
-            <button id="project-button">NEW PROJECT</button>
-        </header>
-        <div id="content">
-            <aside>
-                <button id="todo-button">NEW TODO</button>
-            </aside>
-            <div id="data">
-                <div id="form-holder">
-                    <!-- <form id="project-form" action="">
-                        <input type="text" name="name">
-                        <button type="submit">SUBMIT</button>
-                    </form>  -->
+
+    <!--//-------------NEW DESIGN---------------------->
+    <aside>
+        <h3 class="rotate">YOUR TODO LIST</h3>
+        <div id="wrapper" class="border">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">
+                    <img src="asset/logo3.png" width="40" height="40" class="d-inline-block align-top" alt="">
+                    <span class="header-text">Plan It, Do It!</span>
+                </a>
+                <!-- Button trigger modal or text form -->
+                <button type="button" class="btn" data-toggle="modal" data-target="#modalPopup">Add A Project</button>
+                <button id="project-button">NEW PROJECT</button>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-8" id="task-display">
+                        <h4 class="border-bottom">PROJECTS</h4>
+
+                        <div>PROJECT 1</div>
+                        <div>PROJECT 2</div>
+                        <div>PROJECT 3</div>
+
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-4 middle-text">
+                        <button id="todo-button">NEW TODO</button>
+                        <div id="data">
+                            <div id="form-holder"></div>
+                        </div>
+                        <p class="text"><a data-toggle="modal" data-target="#modalPopup">Creat new task</a> <br> <a data-toggle="modal" data-target="#modalLoginAvatar">Add a new one!</a></p>
+                    </div>
                 </div>
-    
+                <div class="row">
+                    <div class="col">
+                        <footer class="clear">
+                            <hr>
+                            <span class="footer-text text-wrap">“Procrastinate now, don’t put it off.”</span>
+                            <span>— Ellen DeGeneres</span>
+                        </footer>
+                    </div>
+                </div>
             </div>
+            <!-- Modal or text form-->
+            <div class="modal fade" id="modalPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog cascading-modal modal-avatar modal-md" role="document">
+                    <!--Content-->
+                    <div class="modal-content">
+                        <!--Header-->
+                        <div class="modal-header">
+                            <img src="asset/logo1.jpeg" alt="avatar" class="rounded-circle img-responsive" width="100px">
+                        </div>
+                        <!--Body-->
+                        <div class="modal-body text-center mb-1">
+                            <h5 class="mt-1 mb-2">Add Project</h5>
+                            <div class="md-form ml-0 mr-0">
+                                <form id="project-form" action="#">
+                                    <input type="text" name="name" id="form" class="form-control form-control-md" placeholder="project name">
+                                    <input type="submit">
+                                </form>
+                                <label data-error="wrong" data-success="right" for="form" class="ml-0">Procrastinate now, don’t put it off</label>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-cyan mt-1">Save<i class="fas fa-sign-in ml-1"></i></button>
+                                <button type="button" class="btn btn-cyan mt-1" data-dismiss="modal" aria-label="Close">Close<i class="fas fa-sign-in ml-1"></i></button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
+    </aside>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    -->
+    <!--//-------------NEW DESIGN---------------------->
     <script src="main.js"></script>
 </body>
 

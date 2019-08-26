@@ -1,8 +1,10 @@
+import { projectModule } from './projectModule'
+
 const projectForm = `
-<form id="project-form" action="">
+<form id="project-form" action="#">
     <input type="text" name="name">
     <button type="submit">SUBMIT</button>
-</form> `;
+</form>`;
 
 const todoForm = `
 <form id="todo-form" action="">
@@ -14,7 +16,7 @@ const todoForm = `
     <option value="NOT IMPORTANT">NOT IMPORTANT</option>
 </select>
 <select name="project" id="">
-        <option value="GENERAL">GENERAL</option>
+        ${projectModule.returnAllProject().forEach((project)=> '<option value="'+project+'">'+project+'</option>')}
 </select>
     <select name="status" id="">
             <option value="COMPLETE">COMPLETE</option>
@@ -23,4 +25,4 @@ const todoForm = `
 <button type="submit">SUBMIT</button>
 </form>`;
 
-export {projectForm, todoForm};
+export { projectForm, todoForm };
