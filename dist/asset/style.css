@@ -6,12 +6,7 @@ body {
     font-family: "Goudy Bookletter 1911", sans-serif;
 }
 
-aside {
-    display: block;
-    position: relative;
-}
-
-aside h3 {
+body h3 {
     font: bold 12px Sans-Serif;
     letter-spacing: 2px;
     background-image: url("background-image.jpeg");
@@ -27,7 +22,7 @@ aside h3 {
 }
 
 @media only screen and (max-width: 800px) {
-    aside h3 {
+    body h3 {
         display: none;
     }
     #wrapper {
