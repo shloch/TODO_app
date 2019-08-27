@@ -1,15 +1,17 @@
-'use strict';
+"use strict";
 
 var ProjectModule = (function() {
-    let projectList = ['GENERAL'];
-
+    let projectList = localStorage.getItem("projectItems") ?
+        JSON.parse(localStorage.getItem("projectItems")) :
+        ["GENERAL"];
 
     let mod = {};
     mod.addProject = function(newProjectName) {
         projectList.push(newProjectName);
-    }
+        localStorage.setItem("projectItems", JSON.stringify(projectList));
+    };
     mod.removeProject = function(projectName) {
-        let idx = projectList.indexOf(projectName)
+        let idx = projectList.indexOf(projectName);
         if (idx != -1) {
             projectList.splice(idx, 1);
         }
@@ -18,7 +20,6 @@ var ProjectModule = (function() {
     mod.returnAllProjects = function() {
         return projectList;
     };
-
 
     return mod;
 })();

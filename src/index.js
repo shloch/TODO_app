@@ -37,6 +37,7 @@ const updateTodo = index => {
             project,
             status
         );
+        localStorage.setItem("todoItems", JSON.stringify(todo_array));
         domModule.displayTodoList();
     }
 
@@ -46,21 +47,17 @@ const updateTodo = index => {
 window.editTodo = function(index) {
     let form_holder = document.querySelector("#form-holder");
     form_holder.innerHTML = todoForm;
-    document.querySelector('#todo-form [name="title"]').value = todo_array[
-        index
-    ].getTitle();
-    document.querySelector('#todo-form [name="description"]').value = todo_array[
-        index
-    ].getDescription();
-    document.querySelector('#todo-form [name="dueDate"]').value = todo_array[
-        index
-    ].getdueDate();
-    document.querySelector('#todo-form [name="project"]').value = todo_array[
-        index
-    ].getProjectName();
+    document.querySelector('#todo-form [name="title"]').value =
+        todo_array[index].title;
+    document.querySelector('#todo-form [name="description"]').value =
+        todo_array[index].description;
+    document.querySelector('#todo-form [name="dueDate"]').value =
+        todo_array[index].dueDate;
+    document.querySelector('#todo-form [name="project"]').value =
+        todo_array[index].projectName;
 
     //
-    const priority = todo_array[index].getPriority();
+    const priority = todo_array[index].priority;
     const priority_select = document.querySelector(
         '#todo-form [name="priority"]'
     );
@@ -72,7 +69,7 @@ window.editTodo = function(index) {
         priority_select.options[1] = new Option("IMPORTANT", "IMPORTANT");
     }
     //
-    const status = todo_array[index].getStatus();
+    const status = todo_array[index].status;
     const status_select = document.querySelector('#todo-form [name="status"]');
     if (status == "COMPLETE") {
         status_select.options[0] = new Option("COMPLETE", "COMPLETE");

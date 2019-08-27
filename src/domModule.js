@@ -5,7 +5,9 @@ import { todo } from "./TODO_factory";
 
 let projects = ProjectModule.returnAllProjects();
 let form_holder = document.querySelector("#form-holder");
-let todo_array = [];
+let todo_array = localStorage.getItem("todoItems") ?
+    JSON.parse(localStorage.getItem("todoItems")) :
+    [];
 let current_project = 0;
 
 const saveProject = () => {
@@ -14,8 +16,6 @@ const saveProject = () => {
         ProjectModule.addProject(name);
     }
 };
-
- 
 
 const saveTodo = () => {
     const title = document.querySelector('#todo-form [name="title"]').value;
@@ -30,12 +30,13 @@ const saveTodo = () => {
         todo_array.push(
             todo(title, description, dueDate, priority, project, status)
         );
-        domModule.displayTodoList();
     }
+    localStorage.setItem("todoItems", JSON.stringify(todo_array));
+    domModule.displayTodoList();
 
-    console.log(todo_array);
+    console.log(typeof todo_array);
+    //console.log(todo_array[todo_array.length-1].title());
 };
-
 
 const createProject = () => {
     const projectSubmit = document.querySelector("#project-form");
@@ -125,13 +126,13 @@ const domModule = (function() {
         let data = thead;
         let order = 0;
         todo_array.forEach(function(todo, index) {
-            let title = todo.getTitle();
-            let description = todo.getDescription();
-            let dueDate = todo.getdueDate();
-            let priority = todo.getPriority();
-            let status = todo.getStatus();
+            let title = todo.title;
+            let description = todo.description;
+            let dueDate = todo.dueDate;
+            let priority = todo.priority;
+            let status = todo.status;
 
-            if (projects[current_project] === todo.getProjectName()) {
+            if (projects[current_project] === todo.projectName) {
                 order = order + 1;
                 data += `<tr>
             <td>${order}</td>
@@ -148,8 +149,6 @@ const domModule = (function() {
 
         todoTable.innerHTML = data;
     };
-
-    
 
     return mod;
 })();
