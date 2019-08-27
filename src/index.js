@@ -9,6 +9,7 @@ let dom = domModule;
 dom.createProjectForm()
 dom.createTodoForm()
 dom.displayProjectList()
+dom.displayTodoList()
 projectAction()
 
 

@@ -1,7 +1,14 @@
-import { projectForm, todoForm } from './forms'
+import {
+    projectForm,
+    todoForm
+} from './forms'
 // import { createProject, createTodo, todo_array } from './newModule'
-import { ProjectModule } from './projectModule'
-import { todo } from './TODO_factory'
+import {
+    ProjectModule
+} from './projectModule'
+import {
+    todo
+} from './TODO_factory'
 
 let projects = ProjectModule.returnAllProjects();
 let todo_array = [];
@@ -14,7 +21,7 @@ const saveProject = () => {
     }
 }
 
-const saveTodo = () => { 
+const saveTodo = () => {
     const title = document.querySelector('#todo-form [name="title"]').value;
     const description = document.querySelector('#todo-form [name="description"]').value;
     const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
@@ -23,6 +30,7 @@ const saveTodo = () => {
     const status = document.querySelector('#todo-form [name="status"]').value;
 
     todo_array.push(todo(title, description, dueDate, priority, project, status));
+    domModule.displayTodoList();
     console.log(todo_array)
 }
 
@@ -31,6 +39,7 @@ const createProject = () => {
     projectSubmit.addEventListener('submit', (e) => {
         saveProject()
         domModule.displayProjectList();
+        domModule.displayTodoList()
         console.log(ProjectModule.returnAllProjects())
         e.preventDefault()
     })
@@ -46,42 +55,45 @@ const createTodo = () => {
 
 const projectAction = () => {
     const projectElems = document.querySelectorAll('#project-list div');
-    projectElems.forEach((element, index)=>{
-        element.addEventListener('click', (e)=>{
+    const projectTitle = document.querySelector('#project-title');
+    projectElems.forEach((element, index) => {
+        element.addEventListener('click', (e) => {
             current_project = index;
+            projectTitle.innerHTML = projects[current_project]
+            domModule.displayTodoList()
             console.log(projects[current_project]);
             e.preventDefault();
         })
-    })    
+    })
 }
 
-const domModule = (function() {
+const domModule = (function () {
     let mod = {}
     let form_holder = document.querySelector("#form-holder");
 
-    mod.createProjectForm = function() {
+    mod.createProjectForm = function () {
         let projectButton = document.querySelector('#project-button');
         projectButton.addEventListener('click', () => {
-            form_holder.innerHTML = projectForm;         
+            form_holder.innerHTML = projectForm;
             createProject()
         });
     };
 
-    mod.createTodoForm = function() {
+    mod.createTodoForm = function () {
         let todoButton = document.querySelector('#todo-button');
         todoButton.addEventListener('click', () => {
-            form_holder.innerHTML = todoForm; 
+            form_holder.innerHTML = todoForm;
             let todoProject = document.querySelector('#todo-form input:nth-child(1)');
 
-            if (projects[current_project] != "GENERAL") {
+            // if (projects[current_project] != "GENERAL") {
                 todoProject.value = projects[current_project]
                 console.log(todoProject.value)
-            }           
+            // }
             createTodo()
         });
     };
 
-    mod.displayProjectList = function() {
+    mod.displayProjectList = function () {
         let projectPane = document.querySelector('#project-list')
         projectPane.innerHTML = "";
         projects.forEach(function (project, index) {
@@ -92,6 +104,51 @@ const domModule = (function() {
         })
     }
 
+    mod.displayTodoList = function () {
+        const todoTable = document.querySelector('table#todo-list');
+        if (todo_array.length == 0) return [];
+        let thead = `
+        <thead>
+                <td>NO</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Due Date</td>
+                <td>Priority</td>
+                <td>Status</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </thead>
+        `
+        let data = thead;
+
+        todo_array.forEach(function (todo, index) {
+            let title = todo.getTitle()
+            let description = todo.getDescription()
+            let dueDate = todo.getdueDate()
+            let priority = todo.getPriority()
+            let status = todo.getStatus()
+            if (projects[current_project] === todo.getProjectName()) {
+                data += `<tr>
+            <td>${index + 1}</td>
+            <td>${title}</td>
+            <td>${description}</td>
+            <td>${dueDate}</td>
+            <td>${priority}</td>
+            <td>${status}</td>
+            <td><button data-index="${index}" onclick="changeStatus(this)">Edit Todo</button></td>
+            <td><button data-index="${index}" onclick="deleteBook(this)">Delete</button></td>
+        </tr>`
+            }
+        })
+        todoTable.innerHTML = data;
+    }
+
     return mod;
 })();
-export { domModule, todo_array, projectAction };
+
+
+export {
+    domModule,
+    todo_array,
+    projectAction
+};
