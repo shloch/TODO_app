@@ -1,5 +1,3 @@
-import { ProjectModule } from "./projectModule";
-let projects = ProjectModule.returnAllProjects();
 const projectForm = `
 <form id="project-form" action="#">
     <input type="text" name="name" placeholder="Project Name" required>

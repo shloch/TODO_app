@@ -1,106 +1,63 @@
 import { projectForm, todoForm } from "./forms";
-// import { createProject, createTodo, todo_array } from './newModule'
 import { ProjectModule } from "./projectModule";
 import { todo } from "./TODO_factory";
+import { TodoModule } from "./todoModule";
 
 let projects = ProjectModule.returnAllProjects();
 let form_holder = document.querySelector("#form-holder");
-let todo_array = localStorage.getItem("todoItems") ?
-    JSON.parse(localStorage.getItem("todoItems")) :
-    [];
 let current_project = 0;
 
-const saveProject = () => {
-    const name = document.querySelector('#project-form [name="name"]').value;
-    if (name.length > 0) {
-        ProjectModule.addProject(name);
-        domModule.flashMessage("Project created successfully !!");
+window.rePopulateEditForm = function(index) {
+    let form_holder = document.querySelector("#form-holder");
+    form_holder.innerHTML = todoForm;
+    document.querySelector('#todo-form [name="title"]').value =
+        TodoModule.todo_array[index].title;
+    document.querySelector('#todo-form [name="description"]').value =
+        TodoModule.todo_array[index].description;
+    document.querySelector('#todo-form [name="dueDate"]').value =
+        TodoModule.todo_array[index].dueDate;
+    document.querySelector('#todo-form [name="project"]').value =
+        TodoModule.todo_array[index].projectName;
+
+    //
+    const priority = TodoModule.todo_array[index].priority;
+    const priority_select = document.querySelector(
+        '#todo-form [name="priority"]'
+    );
+    if (priority == "IMPORTANT") {
+        priority_select.options[0] = new Option("IMPORTANT", "IMPORTANT");
+        priority_select.options[1] = new Option("NOT IMPORTANT", "NOT IMPORTANT");
+    } else {
+        priority_select.options[0] = new Option("NOT IMPORTANT", "NOT IMPORTANT");
+        priority_select.options[1] = new Option("IMPORTANT", "IMPORTANT");
     }
-};
-
-const saveTodo = () => {
-    const title = document.querySelector('#todo-form [name="title"]').value;
-    const description = document.querySelector('#todo-form [name="description"]')
-        .value;
-    const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
-    const project = document.querySelector('#todo-form [name="project"]').value;
-    const priority = document.querySelector('#todo-form [name="priority"]').value;
-    const status = document.querySelector('#todo-form [name="status"]').value;
-
-    if (title.length > 2 && description.length > 2 && dueDate.length > 2) {
-        todo_array.push(
-            todo(title, description, dueDate, priority, project, status)
-        );
-        domModule.emptyFormDataAfterSubmission();
-        domModule.flashMessage("TODO created successfully !!");
+    //
+    const status = TodoModule.todo_array[index].status;
+    const status_select = document.querySelector('#todo-form [name="status"]');
+    if (status == "COMPLETE") {
+        status_select.options[0] = new Option("COMPLETE", "COMPLETE");
+        status_select.options[1] = new Option("INCOMPLETE", "INCOMPLETE");
+    } else {
+        status_select.options[0] = new Option("INCOMPLETE", "INCOMPLETE");
+        status_select.options[1] = new Option("COMPLETE", "COMPLETE");
     }
-    localStorage.setItem("todoItems", JSON.stringify(todo_array));
-    domModule.displayTodoList();
-};
 
-const createProject = () => {
-    const projectSubmit = document.querySelector("#project-form");
-    projectSubmit.addEventListener("submit", e => {
-        saveProject();
-        domModule.displayProjectList();
-        domModule.displayTodoList();
-        e.preventDefault();
-    });
-};
-
-const createTodo = () => {
     const todoSubmit = document.querySelector("#todo-form");
     todoSubmit.addEventListener("submit", e => {
-        saveTodo();
+        domModule.collectTodoEditedInfo(index);
         e.preventDefault();
     });
 };
 
-const projectAction = () => {
-    const projectElems = document.querySelectorAll("#project-list div");
-    const projectTitle = document.querySelector("#project-title");
-    projectElems.forEach((element, index) => {
-        element.addEventListener("click", e => {
-            domModule.emptyFlashMessage();
-            let AllProjects = document.querySelectorAll("#project-list > div");
-            for (let Project of AllProjects) {
-                if (Project.classList.contains("currently_select_project")) {
-                    Project.classList.remove("currently_select_project");
-                }
-            }
-            element.classList.add("currently_select_project");
-            current_project = index;
-            projectTitle.innerHTML = projects[current_project];
-            form_holder.innerHTML = "";
-            domModule.displayTodoList();
-            e.preventDefault();
-        });
-    });
+window.deleteTodoRow = function(index) {
+    TodoModule.removeTodo(index);
+    localStorage.setItem("todoItems", JSON.stringify(TodoModule.todo_array));
+    domModule.flashMessage("TODO deleted successfully !!");
+    domModule.displayTodoList();
 };
 
 const domModule = (function() {
     let mod = {};
-
-    mod.createProjectForm = function() {
-        let projectButton = document.querySelector("#project-button");
-        projectButton.addEventListener("click", () => {
-            form_holder.innerHTML = projectForm;
-            createProject();
-        });
-    };
-
-    mod.createTodoForm = function() {
-        let todoButton = document.querySelector("#todo-button");
-        todoButton.addEventListener("click", () => {
-            form_holder.innerHTML = todoForm;
-            let todoProject = document.querySelector("#todo-form input:nth-child(1)");
-
-            // if (projects[current_project] != "GENERAL") {
-            todoProject.value = projects[current_project];
-            // }
-            createTodo();
-        });
-    };
 
     mod.displayProjectList = function() {
         let projectPane = document.querySelector("#project-list");
@@ -109,7 +66,7 @@ const domModule = (function() {
             let div = document.createElement("div");
             div.innerHTML = project;
             projectPane.insertAdjacentElement("beforeend", div);
-            projectAction();
+            domModule.listenClicksOnProjectNames();
         });
         let firstProject = document.querySelector(
             "#project-list > div:nth-child(1)"
@@ -117,10 +74,32 @@ const domModule = (function() {
         firstProject.classList.add("currently_select_project");
     };
 
+    mod.listenClicksOnProjectNames = () => {
+        const projectElems = document.querySelectorAll("#project-list div");
+        const projectTitle = document.querySelector("#project-title");
+        projectElems.forEach((element, index) => {
+            element.addEventListener("click", e => {
+                domModule.emptyFlashMessage();
+                let AllProjects = document.querySelectorAll("#project-list > div");
+                for (let Project of AllProjects) {
+                    if (Project.classList.contains("currently_select_project")) {
+                        Project.classList.remove("currently_select_project");
+                    }
+                }
+                element.classList.add("currently_select_project");
+                current_project = index;
+                projectTitle.innerHTML = projects[current_project];
+                form_holder.innerHTML = "";
+                domModule.displayTodoList();
+                e.preventDefault();
+            });
+        });
+    };
+
     mod.displayTodoList = function() {
         const todoTable = document.querySelector("table#todo-list");
         let thead = "";
-        if (todo_array.length == 0) {
+        if (TodoModule.todo_array.length == 0) {
             return [];
         } else {
             thead = `
@@ -139,7 +118,7 @@ const domModule = (function() {
 
         let data = thead;
         let order = 0;
-        todo_array.forEach(function(todo, index) {
+        TodoModule.todo_array.forEach(function(todo, index) {
             let title = todo.title;
             let description = todo.description;
             let dueDate = todo.dueDate;
@@ -155,7 +134,7 @@ const domModule = (function() {
             <td>${dueDate}</td>
             <td>${priority}</td>
             <td>${status}</td>
-            <td><button data-index="${index}" onclick="editTodo(${index})">Edit Todo</button></td>
+            <td><button data-index="${index}" onclick="rePopulateEditForm(${index})">Edit Todo</button></td>
             <td><button data-index="${index}" onclick="deleteTodoRow(${index})">Delete</button></td>
         </tr>`;
             }
@@ -166,6 +145,33 @@ const domModule = (function() {
         }
 
         todoTable.innerHTML = data;
+    };
+
+    mod.collectTodoEditedInfo = function(index) {
+        const title = document.querySelector('#todo-form [name="title"]').value;
+        const description = document.querySelector(
+            '#todo-form [name="description"]'
+        ).value;
+        const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
+        const project = document.querySelector('#todo-form [name="project"]').value;
+        const priority = document.querySelector('#todo-form [name="priority"]')
+            .value;
+        const status = document.querySelector('#todo-form [name="status"]').value;
+
+        if (title.length > 2 && description.length > 2 && dueDate.length > 2) {
+            let editedTodo_obj = todo(
+                title,
+                description,
+                dueDate,
+                priority,
+                project,
+                status
+            );
+            TodoModule.updateTodo(editedTodo_obj, index);
+            domModule.emptyFormDataAfterSubmission();
+            domModule.flashMessage("TODO edited successfully !!");
+            domModule.displayTodoList();
+        }
     };
 
     mod.flashMessage = function(message) {
@@ -190,4 +196,4 @@ const domModule = (function() {
     return mod;
 })();
 
-export { domModule, todo_array, projectAction };
+export { domModule };
