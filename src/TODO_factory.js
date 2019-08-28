@@ -6,13 +6,6 @@ const todo = (
     projectName = "GENERAL",
     status = "INCOMPLETE"
 ) => {
-    /*const getTitle = () => title;
-      const getDescription = () => description;
-      const getdueDate = () => dueDate;
-      const getPriority = () => priority;
-      const getProjectName = () => projectName;
-      const getStatus = () => status;*/
-
     return { title, description, dueDate, priority, projectName, status };
 };
 

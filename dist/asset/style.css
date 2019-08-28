@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap");
 body {
     margin: 0 auto;
     padding: 0;
@@ -16,7 +18,7 @@ body h3 {
     margin-top: 15%;
     width: 18%;
     line-height: 9px;
-    border: 1px solid #A7002A;
+    border: 1px solid #a7002a;
     text-align: center;
     font-weight: bolder;
 }
@@ -93,11 +95,11 @@ body h3 {
 
 #task-display {
     height: 80%;
-    border: 3px solid #A7002A;
+    border: 3px solid #a7002a;
 }
 
 .btn {
-    background-color: #A7002A;
+    background-color: #a7002a;
     color: white;
     font-weight: bold;
 }
@@ -113,7 +115,7 @@ h4 {
 }
 
 .text:hover {
-    color: #A7002A;
+    color: #a7002a;
     cursor: pointer;
     font-weight: bold;
 }
@@ -146,5 +148,25 @@ label {
 }
 
 input {
-    border: 1px solid #F3BBBF !important;
+    border: 1px solid #f3bbbf !important;
+}
+
+#form-holder {
+    padding: 16px 0;
+}
+
+.currently_select_project {
+    font-weight: 700;
+}
+
+th,
+td {
+    border: 1px solid gray;
+}
+
+#flash-message {
+    color: rgb(147, 241, 6);
+    text-align: center;
+    font-family: "Alfa Slab One", cursive;
+    font-size: 25px;
 }

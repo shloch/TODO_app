@@ -16,6 +16,7 @@ projectAction();
 
 window.deleteTodoRow = function(index) {
     todo_array.splice(index, 1);
+    domModule.flashMessage("TODO deleted successfully !!");
     dom.displayTodoList();
 };
 
@@ -38,10 +39,10 @@ const updateTodo = index => {
             status
         );
         localStorage.setItem("todoItems", JSON.stringify(todo_array));
+        domModule.emptyFormDataAfterSubmission();
+        domModule.flashMessage("TODO edited successfully !!");
         domModule.displayTodoList();
     }
-
-    console.log(todo_array);
 };
 
 window.editTodo = function(index) {
@@ -85,5 +86,3 @@ window.editTodo = function(index) {
         e.preventDefault();
     });
 };
-// console.log(todo_array)
-// console.log(ProjectModule.returnAllProjects())

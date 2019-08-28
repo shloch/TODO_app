@@ -14,6 +14,7 @@ const saveProject = () => {
     const name = document.querySelector('#project-form [name="name"]').value;
     if (name.length > 0) {
         ProjectModule.addProject(name);
+        domModule.flashMessage("Project created successfully !!");
     }
 };
 
@@ -30,12 +31,11 @@ const saveTodo = () => {
         todo_array.push(
             todo(title, description, dueDate, priority, project, status)
         );
+        domModule.emptyFormDataAfterSubmission();
+        domModule.flashMessage("TODO created successfully !!");
     }
     localStorage.setItem("todoItems", JSON.stringify(todo_array));
     domModule.displayTodoList();
-
-    console.log(typeof todo_array);
-    //console.log(todo_array[todo_array.length-1].title());
 };
 
 const createProject = () => {
@@ -44,7 +44,6 @@ const createProject = () => {
         saveProject();
         domModule.displayProjectList();
         domModule.displayTodoList();
-        console.log(ProjectModule.returnAllProjects());
         e.preventDefault();
     });
 };
@@ -62,11 +61,18 @@ const projectAction = () => {
     const projectTitle = document.querySelector("#project-title");
     projectElems.forEach((element, index) => {
         element.addEventListener("click", e => {
+            domModule.emptyFlashMessage();
+            let AllProjects = document.querySelectorAll("#project-list > div");
+            for (let Project of AllProjects) {
+                if (Project.classList.contains("currently_select_project")) {
+                    Project.classList.remove("currently_select_project");
+                }
+            }
+            element.classList.add("currently_select_project");
             current_project = index;
             projectTitle.innerHTML = projects[current_project];
             form_holder.innerHTML = "";
             domModule.displayTodoList();
-            console.log(projects[current_project]);
             e.preventDefault();
         });
     });
@@ -91,7 +97,6 @@ const domModule = (function() {
 
             // if (projects[current_project] != "GENERAL") {
             todoProject.value = projects[current_project];
-            console.log(todoProject.value);
             // }
             createTodo();
         });
@@ -106,23 +111,32 @@ const domModule = (function() {
             projectPane.insertAdjacentElement("beforeend", div);
             projectAction();
         });
+        let firstProject = document.querySelector(
+            "#project-list > div:nth-child(1)"
+        );
+        firstProject.classList.add("currently_select_project");
     };
 
     mod.displayTodoList = function() {
         const todoTable = document.querySelector("table#todo-list");
-        if (todo_array.length == 0) return [];
-        let thead = `
-        <thead>
-                <td>NO</td>
-                <td>Title</td>
-                <td>Description</td>
-                <td>Due Date</td>
-                <td>Priority</td>
-                <td>Status</td>
-                <td>Edit</td>
-                <td>Delete</td>
-            </thead>
-        `;
+        let thead = "";
+        if (todo_array.length == 0) {
+            return [];
+        } else {
+            thead = `
+            <thead>
+                    <td>NO</td>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Due Date</td>
+                    <td>Priority</td>
+                    <td>Status</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
+                </thead>
+            `;
+        }
+
         let data = thead;
         let order = 0;
         todo_array.forEach(function(todo, index) {
@@ -146,8 +160,31 @@ const domModule = (function() {
         </tr>`;
             }
         });
+        if (order == 0) {
+            data = "";
+            domModule.flashMessage("No to-do yet...... !!");
+        }
 
         todoTable.innerHTML = data;
+    };
+
+    mod.flashMessage = function(message) {
+        let flashdiv = document.querySelector("#flash-message");
+        flashdiv.innerHTML = message;
+        setTimeout(function() {
+            flashdiv.innerHTML = "<br/>";
+        }, 6000);
+    };
+
+    mod.emptyFlashMessage = function() {
+        let flashdiv = document.querySelector("#flash-message");
+        flashdiv.innerHTML = "";
+    };
+
+    mod.emptyFormDataAfterSubmission = function() {
+        document.querySelector('#todo-form [name="title"]').value = "";
+        document.querySelector('#todo-form [name="description"]').value = "";
+        document.querySelector('#todo-form [name="dueDate"]').value = "";
     };
 
     return mod;
