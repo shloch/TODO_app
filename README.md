@@ -16,7 +16,7 @@ The Default project is called 'GENERAL'.
 
 After creating a new project, click on it to add new TODO tasks under it
 
-![alt text](https://github.com/shloch/TODO_app/blob/dom_module/dist/asset/restaurant_screenshot.png)
+![alt text](https://github.com/shloch/TODO_app/blob/dom_module/dist/asset/screenshot_todo.png)
 
 ## Live demo
 
