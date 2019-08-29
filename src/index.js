@@ -2,14 +2,14 @@
 
 import { todo } from "./TODO_factory";
 import { ProjectModule } from "./projectModule";
-import { domModule } from "./domModule";
+import { domModule, current_project } from "./domModule";
 import { todoForm, projectForm } from "./forms";
 import { TodoModule } from "./todoModule";
 
 let dom = domModule;
 let form_holder = document.querySelector("#form-holder");
 let projects = ProjectModule.returnAllProjects();
-let current_project = 0;
+//let current_project = 0;
 
 //project
 let createProjectForm = function() {
@@ -25,8 +25,12 @@ const createProject = () => {
     projectSubmit.addEventListener("submit", e => {
         const name = document.querySelector('#project-form [name="name"]').value;
         if (name.length > 0) {
-            ProjectModule.addProject(name);
-            domModule.flashMessage("Project created successfully !!");
+            if (!projects.includes(name)) {
+                ProjectModule.addProject(name);
+                domModule.flashMessage("Project created successfully !!");
+            } else {
+                alert("Project Already exists !!");
+            }
         }
         domModule.displayProjectList();
         domModule.displayTodoList();

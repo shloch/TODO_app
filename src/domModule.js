@@ -100,7 +100,7 @@ const domModule = (function() {
         const todoTable = document.querySelector("table#todo-list");
         let thead = "";
         if (TodoModule.todo_array.length == 0) {
-            return [];
+            todoTable.innerHTML = "";
         } else {
             thead = `
             <thead>
@@ -196,4 +196,4 @@ const domModule = (function() {
     return mod;
 })();
 
-export { domModule };
+export { domModule, current_project };
