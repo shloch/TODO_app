@@ -74,6 +74,8 @@ const createTodo = () => {
             TodoModule.addTodo(todoObj);
             domModule.emptyFormDataAfterSubmission();
             domModule.flashMessage("TODO created successfully !!");
+        } else {
+            alert("TITLE + DESCRIPTION of TODO must be of minimum length : 3");
         }
         localStorage.setItem("todoItems", JSON.stringify(TodoModule.todo_array));
         domModule.displayTodoList();
