@@ -38,6 +38,32 @@ const createProject = () => {
     });
 };
 
+let deleteProject = function() {
+    let deleteProjectLink = document.querySelector("#delete-project-link");
+    let projectName = document.querySelector("#project-title").innerHTML;
+    deleteProjectLink.addEventListener("click", () => {
+        if (projects[current_project] == "GENERAL") {
+            alert("Cannot delete GENERAL project");
+        } else {
+            ProjectModule.removeProject(projects[current_project]);
+            //remove all todos
+            /*if (TodoModule.todo_array.length != 0) {
+                                                  TodoModule.todo_array.forEach(function(todo, todoIndex) {
+                                                      if (projectName === todo.projectName) {
+                                                          TodoModule.removeTodo(todoIndex);
+                                                          localStorage.setItem(
+                                                              "todoItems",
+                                                              JSON.stringify(TodoModule.todo_array)
+                                                          );
+                                                      }
+                                                  });
+                                              }*/
+
+            document.location.reload();
+        }
+    });
+};
+
 //todo
 const createTodoForm = function() {
     let todoButton = document.querySelector("#todo-button");
@@ -88,5 +114,6 @@ createTodoForm();
 
 dom.displayProjectList();
 dom.displayTodoList();
+deleteProject();
 //dom.deleteTodo(todoIndex);
 //projectAction();

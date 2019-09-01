@@ -1,24 +1,29 @@
 "use strict";
 
 var ProjectModule = (function() {
-    let projectList = localStorage.getItem("projectItems") ?
-        JSON.parse(localStorage.getItem("projectItems")) :
-        ["GENERAL"];
+    //let projectList =
 
     let mod = {};
+    mod.projectList = localStorage.getItem("projectItems") ?
+        JSON.parse(localStorage.getItem("projectItems")) :
+        ["GENERAL"];
     mod.addProject = function(newProjectName) {
-        projectList.push(newProjectName);
-        localStorage.setItem("projectItems", JSON.stringify(projectList));
+        mod.projectList.push(newProjectName);
+        localStorage.setItem("projectItems", JSON.stringify(mod.projectList));
     };
     mod.removeProject = function(projectName) {
-        let idx = projectList.indexOf(projectName);
+        let idx = mod.projectList.indexOf(projectName);
+        console.log("prj indx =" + idx);
+
         if (idx != -1) {
-            projectList.splice(idx, 1);
+            mod.projectList.splice(idx, 1);
         }
+        localStorage.setItem("projectItems", JSON.stringify(mod.projectList));
+        console.log(mod.projectList);
     };
 
     mod.returnAllProjects = function() {
-        return projectList;
+        return mod.projectList;
     };
 
     return mod;
