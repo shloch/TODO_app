@@ -1,10 +1,5 @@
 "use strict";
 
-import { projectForm, todoForm } from "./forms";
-import { ProjectModule } from "./projectModule";
-import { todo } from "./TODO_factory";
-import { domModule } from "./domModule";
-
 var TodoModule = (function() {
     let mod = {};
     mod.todo_array = localStorage.getItem("todoItems") ?
