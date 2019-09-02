@@ -40,27 +40,30 @@ const createProject = () => {
 
 let deleteProject = function() {
     let deleteProjectLink = document.querySelector("#delete-project-link");
-    let projectName = document.querySelector("#project-title").innerHTML;
     deleteProjectLink.addEventListener("click", () => {
         if (projects[current_project] == "GENERAL") {
             alert("Cannot delete GENERAL project");
         } else {
-            ProjectModule.removeProject(projects[current_project]);
             //remove all todos
-            /*if (TodoModule.todo_array.length != 0) {
-                                                  TodoModule.todo_array.forEach(function(todo, todoIndex) {
-                                                      if (projectName === todo.projectName) {
-                                                          TodoModule.removeTodo(todoIndex);
-                                                          localStorage.setItem(
-                                                              "todoItems",
-                                                              JSON.stringify(TodoModule.todo_array)
-                                                          );
-                                                      }
-                                                  });
-                                              }*/
-
-            document.location.reload();
+            console.log(TodoModule.todo_array);
+            if (TodoModule.todo_array.length != 0) {
+                let arr2delete = [];
+                TodoModule.todo_array.forEach(function(todo, todoIndex) {
+                    if (projects[current_project] === todo.projectName) {
+                        arr2delete.push(todo);
+                    }
+                });
+                TodoModule.todo_array = TodoModule.todo_array.filter(
+                    n => !arr2delete.includes(n)
+                );
+                localStorage.setItem(
+                    "todoItems",
+                    JSON.stringify(TodoModule.todo_array)
+                );
+            }
         }
+        ProjectModule.removeProject(projects[current_project]);
+        document.location.reload();
     });
 };
 
