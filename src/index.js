@@ -1,31 +1,29 @@
-"use strict";
-
 import {
-    todo
-} from "./TODO_factory";
+    todo,
+} from './TODO_factory';
 import {
-    ProjectModule
-} from "./projectModule";
+    ProjectModule,
+} from './projectModule';
 import {
     domModule,
-    currentProject
-} from "./domModule";
+    currentProject,
+} from './domModule';
 import {
     todoForm,
-    projectForm
-} from "./forms";
+    projectForm,
+} from './forms';
 import {
-    TodoModule
-} from "./todoModule";
+    TodoModule,
+} from './todoModule';
 
-let dom = domModule;
-let form_holder = document.querySelector("#form-holder");
+const dom = domModule;
+let form_holder = document.querySelector('#form-holder');
 let projects = ProjectModule.returnAllProjects();
 
 //project
 let createProjectForm = function () {
-    let projectButton = document.querySelector("#project-button");
-    projectButton.addEventListener("click", () => {
+    let projectButton = document.querySelector('#project-button');
+    projectButton.addEventListener('click', () => {
         form_holder.innerHTML = projectForm;
         createProject();
     });

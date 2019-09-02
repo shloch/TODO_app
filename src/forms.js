@@ -21,4 +21,7 @@ const todoForm = `
 <button type="submit">SUBMIT</button>
 </form>`;
 
-export { projectForm, todoForm };
+export {
+    projectForm,
+    todoForm
+};
