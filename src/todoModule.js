@@ -1,22 +1,22 @@
 const TodoModule = (function todoCRUD() {
   const mod = {};
-  mod.todo_array = localStorage.getItem('todoItems') ?
-    JSON.parse(localStorage.getItem('todoItems')) : [];
-  mod.addTodo = function (newTodoObj) {
+  mod.todo_array = localStorage.getItem('todoItems') 
+    ? JSON.parse(localStorage.getItem('todoItems')) : [];
+  mod.addTodo = function addTodoFunction(newTodoObj) {
     TodoModule.todo_array.push(newTodoObj);
     localStorage.setItem('todoItems', JSON.stringify(TodoModule.todo_array));
   };
-  mod.updateTodo = function (editedTodoObj, index) {
+  mod.updateTodo = function updateTodoFunction(editedTodoObj, index) {
     TodoModule.todo_array[index] = editedTodoObj;
     localStorage.setItem('todoItems', JSON.stringify(TodoModule.todo_array));
   };
-  mod.removeTodo = function (todoIndex) {
+  mod.removeTodo = function removeTodoFunction(todoIndex) {
     TodoModule.todo_array.splice(todoIndex, 1);
   };
 
   return mod;
-})();
+}());
 
 export {
-  TodoModule
+  TodoModule as default
 };
