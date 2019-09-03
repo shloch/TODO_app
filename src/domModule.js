@@ -77,14 +77,10 @@ const domModule = (() => {
 
     let data = thead;
     let order = 0;
-    TodoModule.todo_array.forEach((todo, index) => {
-      const title = todo.title;
-      const description = todo.description;
-      const dueDate = todo.dueDate;
-      const priority = todo.priority;
-      const status = todo.status;
+    TodoModule.todo_array.forEach((todoX, index) => {
+      const { title, description, dueDate, priority, status } = todoX;
 
-      if (projects[currentProject] === todo.projectName) {
+      if (projects[currentProject] === todoX.projectName) {
         order += 1;
         data += `<tr>
             <td>${order}</td>
