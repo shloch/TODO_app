@@ -16,13 +16,13 @@ const formHolder = document.querySelector('#form-holder');
 let currentProject = 0;
 
 const domModule = (function () {
-  let mod = {};
+  const mod = {};
 
   mod.displayProjectList = function () {
     const projectPane = document.querySelector('#project-list');
     projectPane.innerHTML = '';
     projects.forEach(function (project, index) {
-      let div = document.createElement('div');
+      const div = document.createElement('div');
       div.innerHTML = project;
       projectPane.insertAdjacentElement('beforeend', div);
       domModule.listenClicksOnProjectNames();
@@ -37,10 +37,10 @@ const domModule = (function () {
     const projectElems = document.querySelectorAll('#project-list div');
     const projectTitle = document.querySelector('#project-title');
     projectElems.forEach((element, index) => {
-      element.addEventListener("click", (e) => {
+      element.addEventListener('click', (e) => {
         domModule.emptyFlashMessage();
         const AllProjects = document.querySelectorAll('#project-list > div');
-        for (let Project of AllProjects) {
+        for (const Project of AllProjects) {
           if (Project.classList.contains('currently_select_project')) {
             Project.classList.remove('currently_select_project');
           }
@@ -48,7 +48,7 @@ const domModule = (function () {
         element.classList.add('currently_select_project');
         currentProject = index;
         projectTitle.innerHTML = projects[currentProject];
-        formHolder.innerHTML = "";
+        formHolder.innerHTML = '';
         domModule.displayTodoList();
         e.preventDefault();
       });
@@ -78,14 +78,14 @@ const domModule = (function () {
     let data = thead;
     let order = 0;
     TodoModule.todo_array.forEach(function (todo, index) {
-      const title = todo.title;
-      const description = todo.description;
-      const dueDate = todo.dueDate;
-      const priority = todo.priority;
-      const status = todo.status;
+      let title = todo.title;
+      let description = todo.description;
+      let dueDate = todo.dueDate;
+      let priority = todo.priority;
+      let status = todo.status;
 
       if (projects[currentProject] === todo.projectName) {
-        order = order + 1;
+        order += 1;
         data += `<tr>
             <td>${order}</td>
             <td>${title}</td>
@@ -99,8 +99,8 @@ const domModule = (function () {
       }
     });
     if (order === 0) {
-      data = "";
-      domModule.flashMessage("No to-do yet...... !!");
+      data = '';
+      domModule.flashMessage('No to-do yet...... !!');
     }
 
     todoTable.innerHTML = data;
@@ -134,7 +134,7 @@ const domModule = (function () {
   };
 
   mod.flashMessage = function (message) {
-    let flashdiv = document.querySelector('#flash-message');
+    const flashdiv = document.querySelector('#flash-message');
     flashdiv.innerHTML = message;
     setTimeout(function () {
       flashdiv.innerHTML = '<br/>';
@@ -142,7 +142,7 @@ const domModule = (function () {
   };
 
   mod.emptyFlashMessage = function () {
-    let flashdiv = document.querySelector('#flash-message');
+    const flashdiv = document.querySelector('#flash-message');
     flashdiv.innerHTML = '';
   };
 
@@ -182,13 +182,13 @@ window.rePopulateEditForm = function (index) {
   }
 
   const { status } = TodoModule.todo_array[index];
-  const status_select = document.querySelector('#todo-form [name="status"]');
+  const statusSelect = document.querySelector('#todo-form [name="status"]');
   if (status === 'COMPLETE') {
-    status_select.options[0] = new Option('COMPLETE', 'COMPLETE');
-    status_select.options[1] = new Option('INCOMPLETE', 'INCOMPLETE');
+    statusSelect.options[0] = new Option('COMPLETE', 'COMPLETE');
+    statusSelect.options[1] = new Option('INCOMPLETE', 'INCOMPLETE');
   } else {
-    status_select.options[0] = new Option('INCOMPLETE', 'INCOMPLETE');
-    status_select.options[1] = new Option('COMPLETE', 'COMPLETE');
+    statusSelect.options[0] = new Option('INCOMPLETE', 'INCOMPLETE');
+    statusSelect.options[1] = new Option('COMPLETE', 'COMPLETE');
   }
 
   const todoSubmit = document.querySelector('#todo-form');
