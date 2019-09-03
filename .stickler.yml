@@ -5,4 +5,3 @@ linters:
 files:
     ignore:
         - 'dist/main.js'
-        - 'webpack.config.js'
