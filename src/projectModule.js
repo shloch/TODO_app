@@ -2,7 +2,7 @@ const ProjectModule = (function theProjectModuleFunction() {
   const mod = {};
   mod.projectList = localStorage.getItem('projectItems')
     ? JSON.parse(localStorage.getItem('projectItems')) : ['GENERAL'];
-  mod.addProject = function theAddProjectFunction (newProjectName) {
+  mod.addProject = function theAddProjectFunction(newProjectName) {
     mod.projectList.push(newProjectName);
     localStorage.setItem('projectItems', JSON.stringify(mod.projectList));
   };
@@ -15,7 +15,7 @@ const ProjectModule = (function theProjectModuleFunction() {
     localStorage.setItem('projectItems', JSON.stringify(mod.projectList));
   };
 
-  mod.returnAllProjects = function theReturnAllProjectsFunction () {
+  mod.returnAllProjects = function theReturnAllProjectsFunction() {
     return mod.projectList;
   };
 
@@ -23,5 +23,5 @@ const ProjectModule = (function theProjectModuleFunction() {
 }());
 
 export {
-  ProjectModule as default
+  ProjectModule as default,
 };

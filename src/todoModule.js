@@ -1,6 +1,6 @@
 const TodoModule = (function todoCRUD() {
   const mod = {};
-  mod.todo_array = localStorage.getItem('todoItems') 
+  mod.todo_array = localStorage.getItem('todoItems')
     ? JSON.parse(localStorage.getItem('todoItems')) : [];
   mod.addTodo = function addTodoFunction(newTodoObj) {
     TodoModule.todo_array.push(newTodoObj);
@@ -18,5 +18,5 @@ const TodoModule = (function todoCRUD() {
 }());
 
 export {
-  TodoModule as default
+  TodoModule as default,
 };
