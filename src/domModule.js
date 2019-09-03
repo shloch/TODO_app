@@ -21,7 +21,7 @@ const domModule = (() => {
   mod.displayProjectList = () => {
     const projectPane = document.querySelector('#project-list');
     projectPane.innerHTML = '';
-    projects.forEach((project, index) => {
+    projects.forEach((project) => {
       const div = document.createElement('div');
       div.innerHTML = project;
       projectPane.insertAdjacentElement('beforeend', div);
@@ -79,7 +79,6 @@ const domModule = (() => {
     let order = 0;
     TodoModule.todo_array.forEach((todoX, index) => {
       const { title, description, dueDate, priority, status } = todoX;
-
       if (projects[currentProject] === todoX.projectName) {
         order += 1;
         data += `<tr>
@@ -114,7 +113,7 @@ const domModule = (() => {
     const status = document.querySelector('#todo-form [name="status"]').value;
 
     if (title.length > 2 && description.length > 2 && dueDate.length > 2) {
-      let editedTodo_obj = todo(
+      const editedTodoObj = todo(
         title,
         description,
         dueDate,
@@ -122,7 +121,7 @@ const domModule = (() => {
         project,
         status
       );
-      TodoModule.updateTodo(editedTodo_obj, index);
+      TodoModule.updateTodo(editedTodoObj, index);
       domModule.emptyFormDataAfterSubmission();
       domModule.flashMessage('TODO edited successfully !!');
       domModule.displayTodoList();
