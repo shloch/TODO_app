@@ -22,6 +22,6 @@ const todoForm = `
 </form>`;
 
 export {
-    projectForm,
-    todoForm
+  projectForm,
+  todoForm
 };

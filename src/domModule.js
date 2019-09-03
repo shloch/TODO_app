@@ -23,7 +23,7 @@ window.rePopulateEditForm = function (index) {
 	document.querySelector('#todo-form [name="dueDate"]').value = TodoModule.todo_array[index].dueDate;
 	document.querySelector('#todo-form [name="project"]').value = TodoModule.todo_array[index].projectName;
 
-	const {priority} = TodoModule.todo_array[index];
+	const { priority } = TodoModule.todo_array[index];
 	const prioritySelect = document.querySelector(
 		'#todo-form [name="priority"]'
 	);
@@ -35,7 +35,7 @@ window.rePopulateEditForm = function (index) {
 		prioritySelect.options[1] = new Option('IMPORTANT', 'IMPORTANT');
 	}
 
-	const {status} = TodoModule.todo_array[index];
+	const { status } = TodoModule.todo_array[index];
 	const status_select = document.querySelector('#todo-form [name="status"]');
 	if (status === "COMPLETE") {
 		status_select.options[0] = new Option('COMPLETE', 'COMPLETE');
