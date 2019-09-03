@@ -9,55 +9,15 @@ import {
 } from './todoModule';
 import {
   todoForm,
-} from "./forms";
+} from './forms';
 
 const projects = ProjectModule.returnAllProjects();
 const formHolder = document.querySelector('#form-holder');
 let currentProject = 0;
 
-window.rePopulateEditForm = function (index) {
-  let formHolder = document.querySelector('#form-holder');
-  formHolder.innerHTML = todoForm;
-  document.querySelector('#todo-form [name="title"]').value = TodoModule.todo_array[index].title;
-  document.querySelector('#todo-form [name="description"]').value = TodoModule.todo_array[index].description;
-  document.querySelector('#todo-form [name="dueDate"]').value = TodoModule.todo_array[index].dueDate;
-  document.querySelector('#todo-form [name="project"]').value = TodoModule.todo_array[index].projectName;
 
-  const { priority } = TodoModule.todo_array[index];
-  const prioritySelect = document.querySelector(
-    '#todo-form [name="priority"]'
-  );
-  if (priority === 'IMPORTANT') {
-    prioritySelect.options[0] = new Option('IMPORTANT', 'IMPORTANT');
-    prioritySelect.options[1] = new Option('NOT IMPORTANT', 'NOT IMPORTANT');
-  } else {
-    prioritySelect.options[0] = new Option('NOT IMPORTANT', 'NOT IMPORTANT');
-    prioritySelect.options[1] = new Option('IMPORTANT', 'IMPORTANT');
-  }
 
-  const { status } = TodoModule.todo_array[index];
-  const status_select = document.querySelector('#todo-form [name="status"]');
-  if (status === "COMPLETE") {
-    status_select.options[0] = new Option('COMPLETE', 'COMPLETE');
-    status_select.options[1] = new Option('INCOMPLETE', 'INCOMPLETE');
-  } else {
-    status_select.options[0] = new Option('INCOMPLETE', 'INCOMPLETE');
-    status_select.options[1] = new Option('COMPLETE', 'COMPLETE');
-  }
 
-  const todoSubmit = document.querySelector("#todo-form");
-  todoSubmit.addEventListener("submit", e => {
-    domModule.collectTodoEditedInfo(index);
-    e.preventDefault();
-  });
-};
-
-window.deleteTodoRow = function (index) {
-  TodoModule.removeTodo(index);
-  localStorage.setItem("todoItems", JSON.stringify(TodoModule.todo_array));
-  domModule.flashMessage("TODO deleted successfully !!");
-  domModule.displayTodoList();
-};
 
 const domModule = (function () {
   let mod = {};
@@ -198,6 +158,49 @@ const domModule = (function () {
 
   return mod;
 })();
+
+window.deleteTodoRow = function (index) {
+  TodoModule.removeTodo(index);
+  localStorage.setItem("todoItems", JSON.stringify(TodoModule.todo_array));
+  domModule.flashMessage("TODO deleted successfully !!");
+  domModule.displayTodoList();
+};
+
+window.rePopulateEditForm = function (index) {
+  formHolder.innerHTML = todoForm;
+  document.querySelector('#todo-form [name="title"]').value = TodoModule.todo_array[index].title;
+  document.querySelector('#todo-form [name="description"]').value = TodoModule.todo_array[index].description;
+  document.querySelector('#todo-form [name="dueDate"]').value = TodoModule.todo_array[index].dueDate;
+  document.querySelector('#todo-form [name="project"]').value = TodoModule.todo_array[index].projectName;
+
+  const { priority } = TodoModule.todo_array[index];
+  const prioritySelect = document.querySelector(
+    '#todo-form [name="priority"]'
+  );
+  if (priority === 'IMPORTANT') {
+    prioritySelect.options[0] = new Option('IMPORTANT', 'IMPORTANT');
+    prioritySelect.options[1] = new Option('NOT IMPORTANT', 'NOT IMPORTANT');
+  } else {
+    prioritySelect.options[0] = new Option('NOT IMPORTANT', 'NOT IMPORTANT');
+    prioritySelect.options[1] = new Option('IMPORTANT', 'IMPORTANT');
+  }
+
+  const { status } = TodoModule.todo_array[index];
+  const status_select = document.querySelector('#todo-form [name="status"]');
+  if (status === 'COMPLETE') {
+    status_select.options[0] = new Option('COMPLETE', 'COMPLETE');
+    status_select.options[1] = new Option('INCOMPLETE', 'INCOMPLETE');
+  } else {
+    status_select.options[0] = new Option('INCOMPLETE', 'INCOMPLETE');
+    status_select.options[1] = new Option('COMPLETE', 'COMPLETE');
+  }
+
+  const todoSubmit = document.querySelector("#todo-form");
+  todoSubmit.addEventListener('submit', e => {
+    domModule.collectTodoEditedInfo(index);
+    e.preventDefault();
+  });
+};
 
 export {
   domModule,
