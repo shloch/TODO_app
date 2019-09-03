@@ -34,22 +34,22 @@ const domModule = (function () {
     let firstProject = document.querySelector(
       "#project-list > div:nth-child(1)"
     );
-    firstProject.classList.add("currently_select_project");
+    firstProject.classList.add('currently_select_project');
   };
 
   mod.listenClicksOnProjectNames = () => {
-    const projectElems = document.querySelectorAll("#project-list div");
-    const projectTitle = document.querySelector("#project-title");
+    const projectElems = document.querySelectorAll('#project-list div');
+    const projectTitle = document.querySelector('#project-title');
     projectElems.forEach((element, index) => {
       element.addEventListener("click", (e) => {
         domModule.emptyFlashMessage();
-        let AllProjects = document.querySelectorAll("#project-list > div");
+        let AllProjects = document.querySelectorAll('#project-list > div');
         for (let Project of AllProjects) {
-          if (Project.classList.contains("currently_select_project")) {
-            Project.classList.remove("currently_select_project");
+          if (Project.classList.contains('currently_select_project')) {
+            Project.classList.remove('currently_select_project');
           }
         }
-        element.classList.add("currently_select_project");
+        element.classList.add('currently_select_project');
         currentProject = index;
         projectTitle.innerHTML = projects[currentProject];
         formHolder.innerHTML = "";
@@ -60,7 +60,7 @@ const domModule = (function () {
   };
 
   mod.displayTodoList = function () {
-    const todoTable = document.querySelector("table#todo-list");
+    const todoTable = document.querySelector('table#todo-list');
     let thead = "";
     if (TodoModule.todo_array.length === 0) {
       todoTable.innerHTML = "";
@@ -132,28 +132,28 @@ const domModule = (function () {
       );
       TodoModule.updateTodo(editedTodo_obj, index);
       domModule.emptyFormDataAfterSubmission();
-      domModule.flashMessage("TODO edited successfully !!");
+      domModule.flashMessage('TODO edited successfully !!');
       domModule.displayTodoList();
     }
   };
 
   mod.flashMessage = function (message) {
-    let flashdiv = document.querySelector("#flash-message");
+    let flashdiv = document.querySelector('#flash-message');
     flashdiv.innerHTML = message;
     setTimeout(function () {
-      flashdiv.innerHTML = "<br/>";
+      flashdiv.innerHTML = '<br/>';
     }, 6000);
   };
 
   mod.emptyFlashMessage = function () {
-    let flashdiv = document.querySelector("#flash-message");
-    flashdiv.innerHTML = "";
+    let flashdiv = document.querySelector('#flash-message');
+    flashdiv.innerHTML = '';
   };
 
   mod.emptyFormDataAfterSubmission = function () {
-    document.querySelector('#todo-form [name="title"]').value = "";
-    document.querySelector('#todo-form [name="description"]').value = "";
-    document.querySelector('#todo-form [name="dueDate"]').value = "";
+    document.querySelector('#todo-form [name="title"]').value = '';
+    document.querySelector('#todo-form [name="description"]').value = '';
+    document.querySelector('#todo-form [name="dueDate"]').value = '';
   };
 
   return mod;
@@ -161,8 +161,8 @@ const domModule = (function () {
 
 window.deleteTodoRow = function (index) {
   TodoModule.removeTodo(index);
-  localStorage.setItem("todoItems", JSON.stringify(TodoModule.todo_array));
-  domModule.flashMessage("TODO deleted successfully !!");
+  localStorage.setItem('todoItems', JSON.stringify(TodoModule.todo_array));
+  domModule.flashMessage('TODO deleted successfully !!');
   domModule.displayTodoList();
 };
 
@@ -195,7 +195,7 @@ window.rePopulateEditForm = function (index) {
     status_select.options[1] = new Option('COMPLETE', 'COMPLETE');
   }
 
-  const todoSubmit = document.querySelector("#todo-form");
+  const todoSubmit = document.querySelector('#todo-form');
   todoSubmit.addEventListener('submit', e => {
     domModule.collectTodoEditedInfo(index);
     e.preventDefault();
