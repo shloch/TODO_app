@@ -13,7 +13,7 @@ import {
 
 const projects = ProjectModule.returnAllProjects();
 const formHolder = document.querySelector('#form-holder');
-const currentProject = 0;
+let currentProject = 0;
 
 const domModule = (function () {
   let mod = {};

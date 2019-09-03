@@ -23,5 +23,5 @@ const ProjectModule = (function theProjectModuleFunction() {
 }());
 
 export {
-  ProjectModule as default,
+  ProjectModule,
 };

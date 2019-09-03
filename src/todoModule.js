@@ -18,5 +18,5 @@ const TodoModule = (function todoCRUD() {
 }());
 
 export {
-  TodoModule as default,
+  TodoModule,
 };
