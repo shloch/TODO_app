@@ -13,26 +13,22 @@ import {
 
 const projects = ProjectModule.returnAllProjects();
 const formHolder = document.querySelector('#form-holder');
-let currentProject = 0;
-
-
-
-
+const currentProject = 0;
 
 const domModule = (function () {
   let mod = {};
 
   mod.displayProjectList = function () {
-    let projectPane = document.querySelector("#project-list");
-    projectPane.innerHTML = "";
+    const projectPane = document.querySelector('#project-list');
+    projectPane.innerHTML = '';
     projects.forEach(function (project, index) {
-      let div = document.createElement("div");
+      let div = document.createElement('div');
       div.innerHTML = project;
-      projectPane.insertAdjacentElement("beforeend", div);
+      projectPane.insertAdjacentElement('beforeend', div);
       domModule.listenClicksOnProjectNames();
     });
-    let firstProject = document.querySelector(
-      "#project-list > div:nth-child(1)"
+    const firstProject = document.querySelector(
+      '#project-list > div:nth-child(1)'
     );
     firstProject.classList.add('currently_select_project');
   };
@@ -43,7 +39,7 @@ const domModule = (function () {
     projectElems.forEach((element, index) => {
       element.addEventListener("click", (e) => {
         domModule.emptyFlashMessage();
-        let AllProjects = document.querySelectorAll('#project-list > div');
+        const AllProjects = document.querySelectorAll('#project-list > div');
         for (let Project of AllProjects) {
           if (Project.classList.contains('currently_select_project')) {
             Project.classList.remove('currently_select_project');
@@ -61,9 +57,9 @@ const domModule = (function () {
 
   mod.displayTodoList = function () {
     const todoTable = document.querySelector('table#todo-list');
-    let thead = "";
+    let thead = '';
     if (TodoModule.todo_array.length === 0) {
-      todoTable.innerHTML = "";
+      todoTable.innerHTML = '';
     } else {
       thead = `
             <thead>
@@ -82,11 +78,11 @@ const domModule = (function () {
     let data = thead;
     let order = 0;
     TodoModule.todo_array.forEach(function (todo, index) {
-      let title = todo.title;
-      let description = todo.description;
-      let dueDate = todo.dueDate;
-      let priority = todo.priority;
-      let status = todo.status;
+      const title = todo.title;
+      const description = todo.description;
+      const dueDate = todo.dueDate;
+      const priority = todo.priority;
+      const status = todo.status;
 
       if (projects[currentProject] === todo.projectName) {
         order = order + 1;
