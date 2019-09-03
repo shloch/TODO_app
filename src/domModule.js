@@ -1,14 +1,14 @@
 import {
-  ProjectModule
+  ProjectModule,
 } from './projectModule';
 import {
-  todo
+  todo,
 } from './TODO_factory';
 import {
-  TodoModule
+  TodoModule,
 } from './todoModule';
 import {
-  todoForm
+  todoForm,
 } from "./forms";
 
 const projects = ProjectModule.returnAllProjects();
