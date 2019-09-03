@@ -17,28 +17,19 @@ import {
 } from './todoModule';
 
 const dom = domModule;
-let form_holder = document.querySelector('#form-holder');
+const formHolder = document.querySelector('#form-holder');
 let projects = ProjectModule.returnAllProjects();
 
-//project
-let createProjectForm = function () {
-  let projectButton = document.querySelector('#project-button');
-  projectButton.addEventListener('click', () => {
-    form_holder.innerHTML = projectForm;
-    createProject();
-  });
-};
-
 const createProject = () => {
-  const projectSubmit = document.querySelector("#project-form");
-  projectSubmit.addEventListener("submit", e => {
+  const projectSubmit = document.querySelector('#project-form');
+  projectSubmit.addEventListener('submit', (e) => {
     const name = document.querySelector('#project-form [name="name"]').value;
     if (name.length > 0) {
       if (!projects.includes(name)) {
         ProjectModule.addProject(name);
-        domModule.flashMessage("Project created successfully !!");
+        domModule.flashMessage('Project created successfully !!');
       } else {
-        alert("Project Already exists !!");
+        alert('Project Already exists !!');
       }
     }
     domModule.displayProjectList();
@@ -47,26 +38,33 @@ const createProject = () => {
   });
 };
 
-let deleteProject = function () {
-  let deleteProjectLink = document.querySelector("#delete-project-link");
-  deleteProjectLink.addEventListener("click", () => {
-    if (projects[currentProject] == "GENERAL") {
-      alert("Cannot delete GENERAL project");
+const createProjectForm = function createProjectForm () {
+  const projectButton = document.querySelector('#project-button');
+  projectButton.addEventListener('click', () => {
+    formHolder.innerHTML = projectForm;
+    createProject();
+  });
+};
+
+const deleteProject = function TheDeleteProjectFunction () {
+  const deleteProjectLink = document.querySelector('#delete-project-link');
+  deleteProjectLink.addEventListener('click', () => {
+    if (projects[currentProject] === 'GENERAL') {
+      alert('Cannot delete GENERAL project');
     } else {
-      //remove all todos
-      console.log(TodoModule.todo_array);
-      if (TodoModule.todo_array.length != 0) {
-        let arr2delete = [];
-        TodoModule.todo_array.forEach(function (todo, todoIndex) {
-          if (projects[currentProject] === todo.projectName) {
-            arr2delete.push(todo);
+      // remove all todos
+      if (TodoModule.todo_array.length !== 0) {
+        const arr2delete = [];
+        TodoModule.todo_array.forEach((toDo) => {
+          if (projects[currentProject] === toDo.projectName) {
+            arr2delete.push(toDo);
           }
         });
         TodoModule.todo_array = TodoModule.todo_array.filter(
           n => !arr2delete.includes(n)
         );
         localStorage.setItem(
-          "todoItems",
+          'todoItems',
           JSON.stringify(TodoModule.todo_array)
         );
       }
@@ -76,17 +74,7 @@ let deleteProject = function () {
   });
 };
 
-//todo
-const createTodoForm = function () {
-  let todoButton = document.querySelector("#todo-button");
-  todoButton.addEventListener("click", () => {
-    form_holder.innerHTML = todoForm;
-    let todoProject = document.querySelector("#todo-form input:nth-child(1)");
-    todoProject.value = projects[currentProject];
-    createTodo();
-  });
-};
-
+// todo
 const createTodo = () => {
   const todoSubmit = document.querySelector("#todo-form");
   todoSubmit.addEventListener("submit", e => {
@@ -101,19 +89,19 @@ const createTodo = () => {
     const status = document.querySelector('#todo-form [name="status"]').value;
 
     if (title.length > 2 && description.length > 2 && dueDate.length > 2) {
-      let todoObj = todo(
+      const todoObj = todo(
         title,
         description,
         dueDate,
         priority,
         project,
-        status
+        status,
       );
       TodoModule.addTodo(todoObj);
       domModule.emptyFormDataAfterSubmission();
-      domModule.flashMessage("TODO created successfully !!");
+      domModule.flashMessage('TODO created successfully !!');
     } else {
-      alert("TITLE + DESCRIPTION of TODO must be of minimum length : 3");
+      alert('TITLE + DESCRIPTION of TODO must be of minimum length : 3');
     }
     localStorage.setItem("todoItems", JSON.stringify(TodoModule.todo_array));
     domModule.displayTodoList();
@@ -121,9 +109,18 @@ const createTodo = () => {
   });
 };
 
+const createTodoForm = function theCreateTodoFormFunction () {
+  const todoButton = document.querySelector('#todo-button');
+  todoButton.addEventListener('click', () => {
+    formHolder.innerHTML = todoForm;
+    const todoProject = document.querySelector('#todo-form input:nth-child(1)');
+    todoProject.value = projects[currentProject];
+    createTodo();
+  });
+};
+
 createProjectForm();
 createTodoForm();
-
 dom.displayProjectList();
 dom.displayTodoList();
 deleteProject();

@@ -5,14 +5,16 @@ const todo = (
 	priority = 'NOT IMPORTANT',
 	projectName = 'GENERAL',
 	status = 'INCOMPLETE',
-) => ({
-	title,
-	description,
-	dueDate,
-	priority,
-	projectName,
-	status
-});
+) => {
+		return ({
+			title,
+			description,
+			dueDate,
+			priority,
+			projectName,
+			status
+		});
+	};
 
 
 export { todo };
