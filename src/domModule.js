@@ -78,11 +78,11 @@ const domModule = (function () {
     let data = thead;
     let order = 0;
     TodoModule.todo_array.forEach(function (todo, index) {
-      let title = todo.title;
-      let description = todo.description;
-      let dueDate = todo.dueDate;
-      let priority = todo.priority;
-      let status = todo.status;
+      const title = todo.title;
+      const description = todo.description;
+      const dueDate = todo.dueDate;
+      const priority = todo.priority;
+      const status = todo.status;
 
       if (projects[currentProject] === todo.projectName) {
         order += 1;
