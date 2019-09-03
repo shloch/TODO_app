@@ -1,12 +1,12 @@
-const ProjectModule = (function () {
+const ProjectModule = (function theProjectModuleFunction() {
   const mod = {};
-  mod.projectList = localStorage.getItem('projectItems') 
-  ? JSON.parse(localStorage.getItem('projectItems')) : ['GENERAL'];
-  mod.addProject = function theAddProjectFunction (newProjectName) {
+  mod.projectList = localStorage.getItem('projectItems')
+    ? JSON.parse(localStorage.getItem('projectItems')) : ['GENERAL'];
+  mod.addProject = function theAddProjectFunction(newProjectName) {
     mod.projectList.push(newProjectName);
     localStorage.setItem('projectItems', JSON.stringify(mod.projectList));
   };
-  mod.removeProject = function theRemoveProjectFunction (projectName) {
+  mod.removeProject = function theRemoveProjectFunction(projectName) {
     const idx = mod.projectList.indexOf(projectName);
 
     if (idx !== -1) {
@@ -15,7 +15,7 @@ const ProjectModule = (function () {
     localStorage.setItem('projectItems', JSON.stringify(mod.projectList));
   };
 
-  mod.returnAllProjects = function theReturnAllProjectsFunction () {
+  mod.returnAllProjects = function theReturnAllProjectsFunction() {
     return mod.projectList;
   };
 
@@ -23,5 +23,5 @@ const ProjectModule = (function () {
 }());
 
 export {
-  ProjectModule
+  ProjectModule as default,
 };

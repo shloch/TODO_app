@@ -89,7 +89,7 @@ const createTodo = () => {
     const status = document.querySelector('#todo-form [name="status"]').value;
 
     if (title.length > 2 && description.length > 2 && dueDate.length > 2) {
-      const todoObj = todo(
+      const todoObj = new todo(
         title,
         description,
         dueDate,
