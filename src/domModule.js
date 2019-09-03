@@ -15,13 +15,13 @@ const projects = ProjectModule.returnAllProjects();
 const formHolder = document.querySelector('#form-holder');
 let currentProject = 0;
 
-const domModule = (function () {
+const domModule = (() => {
   const mod = {};
 
-  mod.displayProjectList = function () {
+  mod.displayProjectList = () => {
     const projectPane = document.querySelector('#project-list');
     projectPane.innerHTML = '';
-    projects.forEach(function (project, index) {
+    projects.forEach((project, index) => {
       const div = document.createElement('div');
       div.innerHTML = project;
       projectPane.insertAdjacentElement('beforeend', div);
@@ -55,7 +55,7 @@ const domModule = (function () {
     });
   };
 
-  mod.displayTodoList = function () {
+  mod.displayTodoList = () => {
     const todoTable = document.querySelector('table#todo-list');
     let thead = '';
     if (TodoModule.todo_array.length === 0) {
@@ -77,7 +77,7 @@ const domModule = (function () {
 
     let data = thead;
     let order = 0;
-    TodoModule.todo_array.forEach(function (todo, index) {
+    TodoModule.todo_array.forEach((todo, index) => {
       const title = todo.title;
       const description = todo.description;
       const dueDate = todo.dueDate;
@@ -106,7 +106,7 @@ const domModule = (function () {
     todoTable.innerHTML = data;
   };
 
-  mod.collectTodoEditedInfo = function (index) {
+  mod.collectTodoEditedInfo = (index) => {
     const title = document.querySelector('#todo-form [name="title"]').value;
     const description = document.querySelector(
       '#todo-form [name="description"]'
@@ -133,20 +133,20 @@ const domModule = (function () {
     }
   };
 
-  mod.flashMessage = function (message) {
+  mod.flashMessage = (message) => {
     const flashdiv = document.querySelector('#flash-message');
     flashdiv.innerHTML = message;
-    setTimeout(function () {
+    setTimeout(() => {
       flashdiv.innerHTML = '<br/>';
     }, 6000);
   };
 
-  mod.emptyFlashMessage = function () {
+  mod.emptyFlashMessage = () => {
     const flashdiv = document.querySelector('#flash-message');
     flashdiv.innerHTML = '';
   };
 
-  mod.emptyFormDataAfterSubmission = function () {
+  mod.emptyFormDataAfterSubmission = () => {
     document.querySelector('#todo-form [name="title"]').value = '';
     document.querySelector('#todo-form [name="description"]').value = '';
     document.querySelector('#todo-form [name="dueDate"]').value = '';
@@ -155,14 +155,14 @@ const domModule = (function () {
   return mod;
 })();
 
-window.deleteTodoRow = function (index) {
+window.deleteTodoRow = (index) => {
   TodoModule.removeTodo(index);
   localStorage.setItem('todoItems', JSON.stringify(TodoModule.todo_array));
   domModule.flashMessage('TODO deleted successfully !!');
   domModule.displayTodoList();
 };
 
-window.rePopulateEditForm = function (index) {
+window.rePopulateEditForm = (index) => {
   formHolder.innerHTML = todoForm;
   document.querySelector('#todo-form [name="title"]').value = TodoModule.todo_array[index].title;
   document.querySelector('#todo-form [name="description"]').value = TodoModule.todo_array[index].description;
