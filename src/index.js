@@ -27,6 +27,7 @@ const createProject = () => {
     if (name.length > 0) {
       if (!projects.includes(name)) {
         ProjectModule.addProject(name);
+        projectSubmit.reset();
         domModule.flashMessage('Project created successfully !!');
       } else {
         alert('Project Already exists !!');

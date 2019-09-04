@@ -6,14 +6,14 @@ const todo = (
 	projectName = 'GENERAL',
 	status = 'INCOMPLETE',
 ) => {
-		return ({
+		return {
 			title,
 			description,
 			dueDate,
 			priority,
 			projectName,
 			status
-		});
+		};
 	};
 
 
