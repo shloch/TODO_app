@@ -28,7 +28,7 @@ const domModule = (() => {
       domModule.listenClicksOnProjectNames();
     });
     const firstProject = document.querySelector(
-      '#project-list > div:nth-child(1)'
+      '#project-list > div:nth-child(1)',
     );
     firstProject.classList.add('currently_select_project');
   };
@@ -40,11 +40,11 @@ const domModule = (() => {
       element.addEventListener('click', (e) => {
         domModule.emptyFlashMessage();
         const AllProjects = document.querySelectorAll('#project-list > div');
-        for (const Project of AllProjects) {
+        AllProjects.forEach((Project)=>{
           if (Project.classList.contains('currently_select_project')) {
             Project.classList.remove('currently_select_project');
           }
-        }
+        })
         element.classList.add('currently_select_project');
         currentProject = index;
         projectTitle.innerHTML = projects[currentProject];
@@ -80,6 +80,7 @@ const domModule = (() => {
     TodoModule.todo_array.forEach((todoX, index) => {
       const { title, description, dueDate, priority, status } = todoX;
       if (projects[currentProject] === todoX.projectName) {
+
         order += 1;
         data += `<tr>
             <td>${order}</td>
@@ -91,6 +92,7 @@ const domModule = (() => {
             <td><button data-index="${index}" onclick="rePopulateEditForm(${index})">Edit Todo</button></td>
             <td><button data-index="${index}" onclick="deleteTodoRow(${index})">Delete</button></td>
         </tr>`;
+
       }
     });
     if (order === 0) {
@@ -104,7 +106,7 @@ const domModule = (() => {
   mod.collectTodoEditedInfo = (index) => {
     const title = document.querySelector('#todo-form [name="title"]').value;
     const description = document.querySelector(
-      '#todo-form [name="description"]'
+      '#todo-form [name="description"]',
     ).value;
     const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
     const project = document.querySelector('#todo-form [name="project"]').value;
@@ -119,7 +121,7 @@ const domModule = (() => {
         dueDate,
         priority,
         project,
-        status
+        status,
       );
       TodoModule.updateTodo(editedTodoObj, index);
       domModule.emptyFormDataAfterSubmission();
@@ -166,7 +168,7 @@ window.rePopulateEditForm = (index) => {
 
   const { priority } = TodoModule.todo_array[index];
   const prioritySelect = document.querySelector(
-    '#todo-form [name="priority"]'
+    '#todo-form [name="priority"]',
   );
   if (priority === 'IMPORTANT') {
     prioritySelect.options[0] = new Option('IMPORTANT', 'IMPORTANT');
@@ -187,7 +189,7 @@ window.rePopulateEditForm = (index) => {
   }
 
   const todoSubmit = document.querySelector('#todo-form');
-  todoSubmit.addEventListener('submit', e => {
+  todoSubmit.addEventListener('submit', (e) => {
     domModule.collectTodoEditedInfo(index);
     e.preventDefault();
   });
@@ -195,5 +197,5 @@ window.rePopulateEditForm = (index) => {
 
 export {
   domModule,
-  currentProject
+  currentProject,
 };
