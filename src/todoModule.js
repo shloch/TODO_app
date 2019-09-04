@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 const TodoModule = (function todoCRUD() {
   const mod = {};
   mod.todo_array = localStorage.getItem('todoItems')
