@@ -27,9 +27,7 @@ const domModule = (() => {
       projectPane.insertAdjacentElement('beforeend', div);
       domModule.listenClicksOnProjectNames();
     });
-    const firstProject = document.querySelector(
-      '#project-list > div:nth-child(1)',
-    );
+    const firstProject = document.querySelector('#project-list > div:nth-child(1)');
     firstProject.classList.add('currently_select_project');
   };
 
