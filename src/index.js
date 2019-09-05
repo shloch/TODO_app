@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 /* eslint-disable no-alert */
 import {
   todo,
@@ -62,13 +63,8 @@ const deleteProject = function TheDeleteProjectFunction() {
             arr2delete.push(toDo);
           }
         });
-        TodoModule.todo_array = TodoModule.todo_array.filter(
-          (n) => !arr2delete.includes(n)
-        );
-        localStorage.setItem(
-          'todoItems',
-          JSON.stringify(TodoModule.todo_array)
-        );
+        TodoModule.todo_array = TodoModule.todo_array.filter(n => !arr2delete.includes(n));
+        localStorage.setItem('todoItems', JSON.stringify(TodoModule.todo_array));
       }
       ProjectModule.removeProject(projects[currentProject]);
     }
