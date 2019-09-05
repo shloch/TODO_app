@@ -13,7 +13,8 @@ import {
 
 const projects = ProjectModule.returnAllProjects();
 const formHolder = document.querySelector('#form-holder');
-let currentProject = 0;
+let currentProjectClicked = 0;
+const currentProject = currentProjectClickedClicked
 
 const domModule = (() => {
   const mod = {};
@@ -38,14 +39,14 @@ const domModule = (() => {
       element.addEventListener('click', (e) => {
         domModule.emptyFlashMessage();
         const AllProjects = document.querySelectorAll('#project-list > div');
-        AllProjects.forEach((Project)=>{
+        AllProjects.forEach((Project) => {
           if (Project.classList.contains('currently_select_project')) {
             Project.classList.remove('currently_select_project');
           }
         })
         element.classList.add('currently_select_project');
-        currentProject = index;
-        projectTitle.innerHTML = projects[currentProject];
+        currentProjectClicked = index;
+        projectTitle.innerHTML = projects[currentProjectClicked];
         formHolder.innerHTML = '';
         domModule.displayTodoList();
         e.preventDefault();
@@ -76,9 +77,10 @@ const domModule = (() => {
     let data = thead;
     let order = 0;
     TodoModule.todo_array.forEach((todoX, index) => {
-      const { title, description, dueDate, priority, status } = todoX;
-      if (projects[currentProject] === todoX.projectName) {
-
+      const { 
+        title, description, dueDate, priority, status 
+      } = todoX;
+      if (projects[currentProjectClicked] === todoX.projectName) {
         order += 1;
         data += `<tr>
             <td>${order}</td>
@@ -90,7 +92,6 @@ const domModule = (() => {
             <td><button data-index="${index}" onclick="rePopulateEditForm(${index})">Edit Todo</button></td>
             <td><button data-index="${index}" onclick="deleteTodoRow(${index})">Delete</button></td>
         </tr>`;
-
       }
     });
     if (order === 0) {
