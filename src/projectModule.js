@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 const ProjectModule = (function theProjectModuleFunction() {
   const mod = {};
   mod.projectList = localStorage.getItem('projectItems')

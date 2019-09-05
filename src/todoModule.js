@@ -18,5 +18,6 @@ const TodoModule = (function todoCRUD() {
 }());
 
 export {
+  // eslint-disable-next-line import/prefer-default-export
   TodoModule,
 };

@@ -14,7 +14,7 @@ import {
 const projects = ProjectModule.returnAllProjects();
 const formHolder = document.querySelector('#form-holder');
 let currentProjectClicked = 0;
-const currentProject = currentProjectClickedClicked
+const currentProject = currentProjectClicked;
 
 const domModule = (() => {
   const mod = {};
@@ -43,7 +43,7 @@ const domModule = (() => {
           if (Project.classList.contains('currently_select_project')) {
             Project.classList.remove('currently_select_project');
           }
-        })
+        });
         element.classList.add('currently_select_project');
         currentProjectClicked = index;
         projectTitle.innerHTML = projects[currentProjectClicked];
@@ -77,8 +77,8 @@ const domModule = (() => {
     let data = thead;
     let order = 0;
     TodoModule.todo_array.forEach((todoX, index) => {
-      const { 
-        title, description, dueDate, priority, status 
+      const {
+        title, description, dueDate, priority, status,
       } = todoX;
       if (projects[currentProjectClicked] === todoX.projectName) {
         order += 1;
@@ -186,4 +186,5 @@ window.rePopulateEditForm = (index) => {
 export {
   domModule,
   currentProject,
+  projects,
 };

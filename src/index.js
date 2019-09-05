@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import {
   todo,
 } from './TODO_factory';
@@ -7,6 +8,7 @@ import {
 import {
   domModule,
   currentProject,
+  projects,
 } from './domModule';
 import {
   todoForm,
@@ -18,7 +20,6 @@ import {
 
 const dom = domModule;
 const formHolder = document.querySelector('#form-holder');
-let projects = ProjectModule.returnAllProjects();
 
 const createProject = () => {
   const projectSubmit = document.querySelector('#project-form');
@@ -39,7 +40,7 @@ const createProject = () => {
   });
 };
 
-const createProjectForm = function createProjectForm () {
+const createProjectForm = function createProjectForm() {
   const projectButton = document.querySelector('#project-button');
   projectButton.addEventListener('click', () => {
     formHolder.innerHTML = projectForm;
@@ -47,7 +48,7 @@ const createProjectForm = function createProjectForm () {
   });
 };
 
-const deleteProject = function TheDeleteProjectFunction () {
+const deleteProject = function TheDeleteProjectFunction() {
   const deleteProjectLink = document.querySelector('#delete-project-link');
   deleteProjectLink.addEventListener('click', () => {
     if (projects[currentProject] === 'GENERAL') {
@@ -62,7 +63,7 @@ const deleteProject = function TheDeleteProjectFunction () {
           }
         });
         TodoModule.todo_array = TodoModule.todo_array.filter(
-          n => !arr2delete.includes(n)
+          (n) => !arr2delete.includes(n)
         );
         localStorage.setItem(
           'todoItems',
@@ -77,8 +78,8 @@ const deleteProject = function TheDeleteProjectFunction () {
 
 // todo
 const createTodo = () => {
-  const todoSubmit = document.querySelector("#todo-form");
-  todoSubmit.addEventListener("submit", e => {
+  const todoSubmit = document.querySelector('#todo-form');
+  todoSubmit.addEventListener('submit', (e) => {
     const title = document.querySelector('#todo-form [name="title"]').value;
     const description = document.querySelector('#todo-form [name="description"]').value;
     const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
@@ -95,13 +96,13 @@ const createTodo = () => {
     } else {
       alert('TITLE + DESCRIPTION of TODO must be of minimum length : 3');
     }
-    localStorage.setItem("todoItems", JSON.stringify(TodoModule.todo_array));
+    localStorage.setItem('todoItems', JSON.stringify(TodoModule.todo_array));
     domModule.displayTodoList();
     e.preventDefault();
   });
 };
 
-const createTodoForm = function theCreateTodoFormFunction () {
+const createTodoForm = function theCreateTodoFormFunction() {
   const todoButton = document.querySelector('#todo-button');
   todoButton.addEventListener('click', () => {
     formHolder.innerHTML = todoForm;

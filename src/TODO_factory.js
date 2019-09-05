@@ -8,4 +8,5 @@ const todo = (title, description, dueDate, priority = 'NOT IMPORTANT', projectNa
 });
 
 
+// eslint-disable-next-line import/prefer-default-export
 export { todo };
