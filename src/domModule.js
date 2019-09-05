@@ -111,14 +111,7 @@ const domModule = (() => {
     const status = document.querySelector('#todo-form [name="status"]').value;
 
     if (title.length > 2 && description.length > 2 && dueDate.length > 2) {
-      const editedTodoObj = todo(
-        title,
-        description,
-        dueDate,
-        priority,
-        project,
-        status,
-      );
+      const editedTodoObj = todo(title, description, dueDate, priority, project, status);
       TodoModule.updateTodo(editedTodoObj, index);
       domModule.emptyFormDataAfterSubmission();
       domModule.flashMessage('TODO edited successfully !!');
