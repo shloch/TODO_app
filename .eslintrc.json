@@ -12,22 +12,5 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "rules": {
-        "space": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+    "rules": {}
 }
