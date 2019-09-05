@@ -80,9 +80,7 @@ const createTodo = () => {
   const todoSubmit = document.querySelector("#todo-form");
   todoSubmit.addEventListener("submit", e => {
     const title = document.querySelector('#todo-form [name="title"]').value;
-    const description = document.querySelector(
-      '#todo-form [name="description"]'
-    ).value;
+    const description = document.querySelector('#todo-form [name="description"]').value;
     const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
     const project = document.querySelector('#todo-form [name="project"]').value;
     const priority = document.querySelector('#todo-form [name="priority"]')
@@ -90,14 +88,7 @@ const createTodo = () => {
     const status = document.querySelector('#todo-form [name="status"]').value;
 
     if (title.length > 2 && description.length > 2 && dueDate.length > 2) {
-      const todoObj = todo(
-        title,
-        description,
-        dueDate,
-        priority,
-        project,
-        status,
-      );
+      const todoObj = todo(title, description, dueDate, priority, project, status);
       TodoModule.addTodo(todoObj);
       domModule.emptyFormDataAfterSubmission();
       domModule.flashMessage('TODO created successfully !!');
