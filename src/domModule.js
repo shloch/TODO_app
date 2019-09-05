@@ -1,3 +1,4 @@
+/* eslint-disable import/no-mutable-exports */
 import {
   ProjectModule,
 } from './projectModule';
@@ -13,8 +14,7 @@ import {
 
 const projects = ProjectModule.returnAllProjects();
 const formHolder = document.querySelector('#form-holder');
-let currentProjectClicked = 0;
-const currentProject = currentProjectClicked;
+let currentProject = 0;
 
 const domModule = (() => {
   const mod = {};
@@ -45,8 +45,8 @@ const domModule = (() => {
           }
         });
         element.classList.add('currently_select_project');
-        currentProjectClicked = index;
-        projectTitle.innerHTML = projects[currentProjectClicked];
+        currentProject = index;
+        projectTitle.innerHTML = projects[currentProject];
         formHolder.innerHTML = '';
         domModule.displayTodoList();
         e.preventDefault();
@@ -80,7 +80,7 @@ const domModule = (() => {
       const {
         title, description, dueDate, priority, status,
       } = todoX;
-      if (projects[currentProjectClicked] === todoX.projectName) {
+      if (projects[currentProject] === todoX.projectName) {
         order += 1;
         data += `<tr>
             <td>${order}</td>
