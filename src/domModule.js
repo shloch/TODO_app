@@ -103,9 +103,7 @@ const domModule = (() => {
 
   mod.collectTodoEditedInfo = (index) => {
     const title = document.querySelector('#todo-form [name="title"]').value;
-    const description = document.querySelector(
-      '#todo-form [name="description"]',
-    ).value;
+    const description = document.querySelector('#todo-form [name="description"]').value;
     const dueDate = document.querySelector('#todo-form [name="dueDate"]').value;
     const project = document.querySelector('#todo-form [name="project"]').value;
     const priority = document.querySelector('#todo-form [name="priority"]')
@@ -165,9 +163,7 @@ window.rePopulateEditForm = (index) => {
   document.querySelector('#todo-form [name="project"]').value = TodoModule.todo_array[index].projectName;
 
   const { priority } = TodoModule.todo_array[index];
-  const prioritySelect = document.querySelector(
-    '#todo-form [name="priority"]',
-  );
+  const prioritySelect = document.querySelector('#todo-form [name="priority"]');
   if (priority === 'IMPORTANT') {
     prioritySelect.options[0] = new Option('IMPORTANT', 'IMPORTANT');
     prioritySelect.options[1] = new Option('NOT IMPORTANT', 'NOT IMPORTANT');
