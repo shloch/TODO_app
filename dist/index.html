@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="asset/style.css" />
+    <title>TODO</title>
+</head>
+
+<body>
+    <h3 class="rotate">YOUR TODO LIST</h3>
+    <div id="wrapper" class="border">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="asset/logo3.png" width="40" height="40" class="d-inline-block align-top" alt="" />
+                <span class="header-text">Plan It, Do It!</span>
+            </a>
+            <button id="todo-button" class="btn mr-2">NEW TODO</button>
+            <button id="project-button" class="btn">
+          NEW PROJECT
+        </button>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8" id="task-display">
+                    <h4 class="border-bottom">PROJECTS</h4>
+                    <div id="project-list"></div>
+                </div>
+                <div class="col-lg-9 col-md-6 col-sm-4 middle-text">
+                    <h1 id="project-title">GENERAL</h1>
+                    ( <a href="#" id="delete-project-link">Delete Project</a> )
+                    <div id="data">
+                        <div id="form-holder"></div>
+                        <div id="flash-message"></div>
+                        <table id="todo-list"></table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <footer class="clear">
+                        <hr />
+                        <span class="footer-text text-wrap">“Procrastinate now, don’t put it off.”</span
+              >
+              <span>— Ellen DeGeneres</span>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--//-------------JAVASCRIPT---------------------->
+    <script src="main.js"></script>
+</body>
+
+</html>

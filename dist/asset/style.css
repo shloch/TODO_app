@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap");
+body {
+    margin: 0 auto;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: "Goudy Bookletter 1911", sans-serif;
+}
+
+body h3 {
+    font: bold 12px Sans-Serif;
+    letter-spacing: 2px;
+    background-image: url("background-image.jpeg");
+    color: #fff;
+    padding: 20px 30px 5px 5px;
+    position: absolute;
+    margin-top: 15%;
+    width: 18%;
+    line-height: 9px;
+    border: 1px solid #a7002a;
+    text-align: center;
+    font-weight: bolder;
+}
+
+@media only screen and (max-width: 800px) {
+    body h3 {
+        display: none;
+    }
+    #wrapper {
+        width: 100%;
+    }
+    .btn {
+        margin-left: 60%;
+    }
+    #task-display {
+        max-height: 50%;
+    }
+    .text {
+        margin-top: 10% !important;
+        margin-left: 30% !important;
+    }
+    footer {
+        max-height: 2%;
+    }
+    .footer-text {
+        margin-left: 0 !important;
+        text-align: center;
+    }
+    footer span {
+        font-size: 10px !important;
+        padding-right: 0 !important;
+        color: #f9b3bc;
+        font-weight: bolder;
+    }
+    .btn {
+        padding: 2xp;
+    }
+}
+
+.rotate {
+    transform: rotate(-90deg);
+    /* Legacy vendor prefixes Optional... just keeping for future use if neccesery */
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+    /* IE */
+    -ms-transform: rotate(-90deg);
+    /* Opera */
+    -o-transform: rotate(-90deg);
+    /* Internet Explorer */
+    filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#wrapper {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.navbar {
+    background-image: url("background-image.jpeg");
+}
+
+.navbar-brand {
+    margin-right: 50%;
+}
+
+.header-text {
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+#task-display {
+    height: 80%;
+    border: 3px solid #a7002a;
+}
+
+.btn {
+    background-color: #a7002a;
+    color: white;
+    font-weight: bold;
+}
+
+h4 {
+    padding-left: 30%;
+    padding-top: 5%;
+}
+
+.text {
+    margin-left: 45%;
+    margin-top: 40%;
+}
+
+.text:hover {
+    color: #a7002a;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+footer {
+    height: 5%;
+    width: 100%;
+}
+
+footer.clear {
+    clear: both;
+}
+
+hr {
+    width: 80%;
+}
+
+footer span {
+    font-size: 10px;
+    padding-right: 10px;
+    align-self: auto;
+}
+
+.footer-text {
+    margin-left: 60%;
+}
+
+label {
+    font-size: 12px;
+}
+
+input {
+    border: 1px solid #f3bbbf !important;
+}
+
+#form-holder {
+    padding: 16px 0;
+}
+
+.currently_select_project {
+    font-weight: 700;
+}
+
+th,
+td {
+    border: 1px solid gray;
+}
+
+#flash-message {
+    color: rgb(147, 241, 6);
+    text-align: center;
+    font-family: "Alfa Slab One", cursive;
+    font-size: 25px;
+}
