@@ -12,7 +12,7 @@ Each TODO task has the following properties.
 
 Each TODO task, belongs to a particular PROJECT.
 
-The Default project is called 'GENERAL'.
+The Default project is called 'GENERAL'
 
 After creating a new project, click on it to add new TODO tasks under it
 
