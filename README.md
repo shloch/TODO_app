@@ -24,5 +24,12 @@ https://raw.githack.com/shloch/TODO_app/master/dist/index.html
 
 ## Contributors
 
-- Louis SHEY _https://github.com/shloch_
+### 👤 **SHEY Louis CHIA**
+
+- Github: [shloch](https://github.com/shloch)
+- Twitter: [@shloch](https://twitter.com/shloch)
+- Linkedin: [/in/shey-louis-chia](https://www.linkedin.com/in/shey-louis-chia)
+- Email: shloch2007@yahoo.fr
+
+## 👤 **Terver Aosu**
 - Terver Aosu _https://github.com/truetechcode_
