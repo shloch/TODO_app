@@ -22,6 +22,12 @@ After creating a new project, click on it to add new TODO tasks under it
 
 https://raw.githack.com/shloch/TODO_app/master/dist/index.html
 
+## Technologies
+
+- HTML
+- CSS
+- Javascript (webpack + localStorage used)
+
 ## Contributors
 
 ### 👤 **SHEY Louis CHIA**
