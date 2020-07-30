@@ -39,3 +39,9 @@ https://raw.githack.com/shloch/TODO_app/master/dist/index.html
 
 ## 👤 **Terver Aosu**
 - Terver Aosu _https://github.com/truetechcode_
+
+## Acknowledgements
+- http://javascript.info/
+- https://webpack.js.org
+- https://nodejs.org/
+- https://www.theodinproject.com/
